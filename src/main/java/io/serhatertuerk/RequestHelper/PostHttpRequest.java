@@ -31,7 +31,7 @@ public class PostHttpRequest extends ParameterStringBuilder {
 
             con.setDoOutput(true);
             DataOutputStream out = new DataOutputStream(con.getOutputStream());
-            out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
+            out.writeUTF(ParameterStringBuilder.getParamsString(parameters));
             out.flush();
             out.close();
 

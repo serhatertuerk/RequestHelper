@@ -1,4 +1,6 @@
 .DS_Store
-target/**
-.idea/**
-*.iml
+PW**
+.idea**
+**.iml
+**/target/**
+**/IT/Backend/MavenTest/reports/20**
