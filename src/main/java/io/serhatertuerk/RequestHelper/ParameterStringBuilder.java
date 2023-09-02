@@ -1,7 +1,7 @@
 package io.serhatertuerk.RequestHelper;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class ParameterStringBuilder {
@@ -14,22 +14,17 @@ public class ParameterStringBuilder {
     protected static String getParamsString(Map<String, String> parameters) {
         StringBuilder result = new StringBuilder();
 
-        try {
-            for (Map.Entry<String, String> entry : parameters.entrySet()) {
-                result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-                result.append("&");
-            }
-
-            String resultString = result.toString();
-            return resultString.length() > 0
-                    ? resultString.substring(0, resultString.length() - 1)
-                    : resultString;
-        } catch (UnsupportedEncodingException ee) {
-            ee.printStackTrace();
+        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+            result.append(URLEncoder.encode(entry.getKey(), StandardCharsets.UTF_8));
+            result.append("=");
+            result.append(URLEncoder.encode(entry.getValue(), StandardCharsets.UTF_8));
+            result.append("&");
         }
 
-        return result.toString();
+        String resultString = result.toString();
+        return !resultString.isEmpty()
+                ? resultString.substring(0, resultString.length() - 1)
+                : resultString;
+
     }
 }
